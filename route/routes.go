@@ -6,5 +6,6 @@ import (
 )
 
 func SampleRoute(c *gin.Engine) {
-	c.POST("/user", controlls.Sample)
+	c.POST("/user", controlls.SentOtp)
+	c.POST("/verifyOtp", controlls.OtpVerification)
 }

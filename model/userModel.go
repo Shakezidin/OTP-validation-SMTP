@@ -5,3 +5,8 @@ type User struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 }
+
+type Verify struct {
+	Email string `json:"email"`
+	OTP   int    `json:"otp"`
+}

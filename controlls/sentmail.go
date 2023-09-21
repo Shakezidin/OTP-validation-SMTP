@@ -2,25 +2,18 @@ package controlls
 
 import (
 	"fmt"
+	"math/rand"
 	"net/smtp"
 	"os"
-
-	"github.com/Shakezidin/model"
-	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
-func Sample(c *gin.Context) {
-	var user model.User
-	if err := c.BindJSON(&user); err != nil {
-		c.JSON(400, gin.H{"error": err})
-		return
-	}
-	sentMAil(user.Email, user.Name)
-	c.JSON(200, gin.H{"status": "success"})
+func generateOTP() int {
+	return rand.Intn(9999 - 1000)
 }
 
-func sentMAil(email, name string) {
-	msg := "hello " + name + " ,How are you"
+func sentMAil(email, name string, otp int) {
+	msg := "hello " + name + " your otp is " + strconv.Itoa(otp)
 	smtpEmail := os.Getenv("EMAIL")
 	smtpPass := os.Getenv("PASSWORD")
 	auth := smtp.PlainAuth(
